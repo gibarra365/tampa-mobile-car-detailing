@@ -96,8 +96,8 @@ nav{
 @media(max-width:768px){.mob-float{display:flex}}
 
 /* ─── Hero ─────────────────────────────────────────────────────────────────── */
-#hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:stretch;overflow:hidden;position:relative;background:#fdf8f4}
-.hero-left{display:flex;flex-direction:column;justify-content:center;padding:100px clamp(28px,5vw,72px) 80px;position:relative;z-index:2}
+#hero{min-height:100vh;display:flex;align-items:center;overflow:hidden;position:relative;background:#fdf8f4}
+.hero-content{display:flex;flex-direction:column;justify-content:center;padding:100px clamp(28px,5vw,72px) 80px;position:relative;z-index:2;max-width:600px;flex-shrink:0}
 .hero-glow{position:absolute;top:-20%;left:-10%;width:600px;height:500px;background:radial-gradient(ellipse,rgba(180,83,9,.07) 0%,transparent 68%);pointer-events:none;animation:glow 8s ease-in-out infinite}
 .hero-pill{display:inline-flex;align-items:center;gap:8px;background:rgba(180,83,9,.08);border:1px solid var(--acc-bdr);padding:7px 18px;border-radius:50px;font-size:12px;font-weight:600;color:#b45309;margin-bottom:28px;letter-spacing:.06em;animation:fadeIn .7s both}
 .hero-h1{font-size:clamp(40px,6.5vw,76px);font-weight:900;line-height:1.03;letter-spacing:-.05em;color:#1c0e04;margin-bottom:16px;animation:fadeUp .8s .1s both}
@@ -124,29 +124,22 @@ nav{
 .stat-label{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--txt-m)}
 .stat-div{width:1px;background:var(--bdr);align-self:stretch}
 
-/* ─── Hero visual (PUBLIC_DEMO_MODE) ───────────────────────────────────────── */
-.hero-visual{
-  position:relative;overflow:hidden;
-  background:linear-gradient(145deg,#f5e8d8 0%,#dbb890 40%,#b45309 75%,#f5e8d8 100%);
-  background-size:220% 220%;
-  animation:hv-drift 14s ease-in-out infinite
-}
-.hero-photo-overlay{position:absolute;inset:0;z-index:2;background:linear-gradient(to right,rgba(253,248,244,.15) 0%,transparent 28%)}
-/* Reduced to 1 ring — cleaner, lets skyline breathe */
-.hv-ring{position:absolute;border-radius:50%;border:1px solid rgba(180,83,9,.1);top:40%;left:50%;transform:translate(-50%,-50%);width:420px;height:420px;pointer-events:none}
-.hv-glow--tl{position:absolute;width:280px;height:280px;top:-60px;left:-50px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.18) 0%,transparent 70%);pointer-events:none}
-/* City glow — ambient light at skyline base */
-.hv-city-glow{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:90%;height:180px;background:radial-gradient(ellipse at bottom,rgba(180,83,9,.22) 0%,transparent 72%);z-index:1;pointer-events:none}
-.hv-center{position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding-top:15%;pointer-events:none}
-.hv-mono{font-family:Georgia,serif;font-size:clamp(80px,12vw,140px);font-weight:400;color:rgba(180,83,9,.14);line-height:1;letter-spacing:-.04em;animation:glow 8s ease-in-out infinite}
-.hv-wordmark{font-size:12px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:rgba(180,83,9,.32);margin-top:-12px}
-.hv-tagline{font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(180,83,9,.22);margin-top:6px}
-.hv-dots{position:absolute;inset:0;z-index:1;background-image:radial-gradient(circle,rgba(180,83,9,.05) 1px,transparent 1px);background-size:24px 24px}
-.hero-city-tag{position:absolute;top:28px;right:28px;z-index:4;background:rgba(28,14,4,.72);color:#fff;padding:6px 14px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
-.hero-rating-badge{position:absolute;bottom:32px;left:32px;z-index:4;background:rgba(253,248,244,.94);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(180,83,9,.18);border-radius:14px;padding:16px 22px;box-shadow:0 4px 24px rgba(0,0,0,.14);animation:scaleIn 1s .6s both}
-.badge-stars{font-size:16px;color:#b45309;letter-spacing:2px;margin-bottom:4px}
-.badge-score{font-size:26px;font-weight:900;color:#1c0e04;letter-spacing:-.04em}
-.badge-count{font-size:11px;color:var(--txt-m);font-weight:600;margin-top:2px}
+/* ─── Hero industry visual panel ────────────────────────────────────────────── */
+.hero-industry-visual{position:absolute;right:0;top:0;bottom:0;width:52%;overflow:hidden;pointer-events:none;background:linear-gradient(135deg,#f5e8d8 0%,#dbb890 50%,#b45309 100%)}
+
+@keyframes hiv-in{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes route-draw{from{stroke-dashoffset:300}to{stroke-dashoffset:0}}
+@keyframes scan-blink{0%,100%{opacity:.4}50%{opacity:1}}
+.hiv-route-line{stroke-dasharray:8 5;animation:route-draw 2.5s ease-out .5s both}
+.hiv-scan-dot{animation:scan-blink 1.8s ease-in-out infinite}
+.hiv-svc-card{padding:16px 20px;bottom:18%;right:5%;min-width:172px;background:rgba(253,248,244,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(180,83,9,.2);border-radius:16px;box-shadow:0 8px 40px rgba(0,0,0,.1);position:absolute;z-index:5;animation:hiv-in 1s .6s both}
+.hiv-svc-title{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#b45309;margin-bottom:10px}
+.hiv-svc-row{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:#1c0e04;padding:3px 0}
+.hiv-svc-icon{color:#b45309;font-weight:800;font-size:11px}
+.hiv-diag-card{padding:14px 20px;top:14%;right:5%;background:rgba(253,248,244,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(180,83,9,.2);border-radius:16px;box-shadow:0 8px 40px rgba(0,0,0,.1);position:absolute;z-index:5;animation:hiv-in 1s .3s both}
+.hiv-diag-title{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(28,14,4,.45);margin-bottom:8px}
+.hiv-diag-row{display:flex;justify-content:space-between;align-items:center;font-size:12px;font-weight:600;color:#1c0e04;gap:20px;padding:3px 0}
+.hiv-diag-ok{color:#b45309;font-weight:700}
 
 /* ─── Trust bar ────────────────────────────────────────────────────────────── */
 .trust-bar{background:#ffffff;border-top:1px solid var(--bdr);border-bottom:1px solid var(--bdr);padding:18px clamp(24px,5vw,64px);display:flex;align-items:center;justify-content:center;gap:28px;flex-wrap:wrap}
@@ -286,10 +279,9 @@ footer{background:#1c0e04;border-top:1px solid rgba(255,255,255,.06);padding:24p
   .reviews-header{flex-direction:column;align-items:flex-start}
 }
 @media(max-width:768px){
-  #hero{display:block;position:relative;min-height:100vh;min-height:100svh;background:#1c0e04}
-  .hero-visual{position:absolute;inset:0}
-  .hero-photo-overlay{background:linear-gradient(to top,rgba(28,14,4,.92) 0%,rgba(28,14,4,.55) 40%,rgba(28,14,4,.10) 100%)}
-  .hero-left{position:relative;z-index:2;min-height:100vh;min-height:100svh;justify-content:flex-end;padding:0 28px 56px}
+  #hero{position:relative;min-height:100vh;min-height:100svh;background:#1c0e04}
+  .hero-industry-visual{position:absolute;inset:0;width:100%;opacity:.18;pointer-events:none}
+  .hero-content{position:relative;z-index:2;min-height:100vh;min-height:100svh;max-width:100%;justify-content:flex-end;padding:0 28px 56px}
   .hero-glow{display:none}
   .hero-h1{color:#fff;font-size:clamp(34px,9vw,50px)}
   .hero-sub{color:rgba(255,255,255,.78);max-width:100%}
@@ -301,9 +293,7 @@ footer{background:#1c0e04;border-top:1px solid rgba(255,255,255,.06);padding:24p
   .hero-stats .stat-label{color:rgba(255,255,255,.55)}
   .hero-stats .stat-div{background:rgba(255,255,255,.18)}
   .cta-secondary{border-color:rgba(255,255,255,.3);color:#fff}
-  .hero-rating-badge{bottom:auto;top:24px;left:20px;padding:12px 16px}
-  .badge-score{font-size:20px}.badge-stars{font-size:13px}.badge-count{font-size:10px}
-  .hero-city-tag{top:24px;right:20px}
+  .hiv-proof-card,.hiv-rating-float,.hiv-thermo-card,.hiv-check-card,.hiv-svc-card,.hiv-diag-card,.niv-card,.niv-rating{display:none}
 }
 .tilt{transition:transform .3s ease,box-shadow .3s ease;will-change:transform}
 /* City skyline */
@@ -338,7 +328,7 @@ footer{background:#1c0e04;border-top:1px solid rgba(255,255,255,.06);padding:24p
 
 <!-- HERO — no .reveal, always visible via CSS keyframes -->
 <section id="hero">
-  <div class="hero-left">
+  <div class="hero-content">
     <div class="hero-glow"></div>
     <div style="position:relative;z-index:1">
       <div class="hero-pill">⭐ 4/5 · 12 Reviews · Tampa</div>
@@ -368,24 +358,38 @@ footer{background:#1c0e04;border-top:1px solid rgba(255,255,255,.06);padding:24p
       </div>
     </div>
   </div>
-  <div class="hero-visual">
-    <div class="hv-ring"></div>
-    <div class="hv-glow--tl"></div>
-    <div class="hv-city-glow"></div>
-    <div class="hv-center">
-      <div class="hv-mono">T</div>
-      <div class="hv-wordmark">Tampa Mobile Car</div>
-      <div class="hv-tagline">Tampa</div>
-    </div>
-    <div class="hv-dots"></div>
-    <div class="hero-photo-overlay"></div>
-    <div class="hero-city-tag">TAM · Tampa</div>
-    <div class="hero-rating-badge">
-      <div class="badge-stars">★★★★★</div>
-      <div class="badge-score">4</div>
-      <div class="badge-count">12 Google Reviews</div>
-    </div>
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300" preserveAspectRatio="xMidYMax slice" aria-hidden="true" role="presentation" class="city-skyline" data-city="Tampa" style="position:absolute;bottom:0;left:0;width:100%;height:auto;z-index:2;pointer-events:none;"><defs><linearGradient id="sg-h-tampa" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="white" stop-opacity="0"/><stop offset="22%" stop-color="white" stop-opacity="0.28"/><stop offset="52%" stop-color="white" stop-opacity="0.82"/><stop offset="100%" stop-color="white" stop-opacity="1"/></linearGradient><mask id="sm-h-tampa"><rect width="1200" height="300" fill="url(#sg-h-tampa)"/></mask></defs><g mask="url(#sm-h-tampa)" fill="#b45309" opacity="0.38"><rect x="20" y="230" width="50" height="70"/><rect x="80" y="210" width="45" height="90"/><rect x="135" y="215" width="55" height="85"/><rect x="200" y="195" width="40" height="105"/><rect x="255" y="220" width="60" height="80"/><rect x="325" y="140" width="55" height="160"/><rect x="345" y="118" width="25" height="182"/><rect x="390" y="82" width="58" height="218"/><rect x="408" y="60" width="30" height="240"/><rect x="458" y="143" width="60" height="157"/><rect x="525" y="158" width="50" height="142"/><rect x="582" y="172" width="55" height="128"/><rect x="648" y="198" width="65" height="102"/><rect x="720" y="218" width="70" height="82"/><rect x="802" y="232" width="78" height="68"/><rect x="890" y="242" width="85" height="58"/><rect x="985" y="248" width="82" height="52"/><rect x="1075" y="253" width="80" height="47"/><rect x="1165" y="258" width="55" height="42"/></g></svg>
+  <div class="hero-industry-visual">
+    
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse 75% 55% at 75% 35%,rgba(180,83,9,.09) 0%,transparent 60%);z-index:0"></div>
+  <div style="position:absolute;inset:0;background-image:radial-gradient(circle,rgba(180,83,9,.04) 1px,transparent 1px);background-size:24px 24px;z-index:0"></div>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 380"
+    style="position:absolute;top:15%;left:4%;width:min(76%,330px);height:auto;z-index:2;pointer-events:none">
+    <path d="M 30 230 Q 45 205 65 200 L 110 192 L 140 160 L 260 160 L 290 192 L 335 200 Q 355 205 370 230 L 370 268 L 30 268 Z" fill="none" stroke="#b45309" stroke-width="1.5" opacity="0.2" stroke-linejoin="round"/>
+    <ellipse cx="96" cy="270" rx="36" ry="36" fill="none" stroke="#b45309" stroke-width="1.5" opacity="0.18"/>
+    <ellipse cx="96" cy="270" rx="18" ry="18" fill="none" stroke="#b45309" stroke-width="1" opacity="0.12"/>
+    <ellipse cx="304" cy="270" rx="36" ry="36" fill="none" stroke="#b45309" stroke-width="1.5" opacity="0.18"/>
+    <ellipse cx="304" cy="270" rx="18" ry="18" fill="none" stroke="#b45309" stroke-width="1" opacity="0.12"/>
+    <rect x="165" y="192" width="70" height="30" rx="4" fill="none" stroke="#b45309" stroke-width="1" opacity="0.14"/>
+    <line x1="175" y1="199" x2="175" y2="215" stroke="#b45309" stroke-width=".8" opacity="0.14"/>
+    <line x1="185" y1="199" x2="185" y2="215" stroke="#b45309" stroke-width=".8" opacity="0.14"/>
+    <line x1="195" y1="199" x2="195" y2="215" stroke="#b45309" stroke-width=".8" opacity="0.14"/>
+    <path class="hiv-route-line" d="M 200 355 Q 200 330 220 310 Q 255 275 260 245" fill="none" stroke="#b45309" stroke-width="1.8" opacity="0.25" stroke-linecap="round"/>
+    <circle class="hiv-scan-dot" cx="260" cy="240" r="7" fill="none" stroke="#b45309" stroke-width="1.5" opacity="0.35"/>
+    <circle cx="260" cy="240" r="3" fill="#b45309" opacity="0.4"/>
+    <circle cx="200" cy="358" r="5" fill="#b45309" opacity="0.3"/>
+    <path d="M 14 26 L 14 46 L 34 46" fill="none" stroke="#b45309" stroke-width="1.2" opacity="0.13" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M 386 26 L 386 46 L 366 46" fill="none" stroke="#b45309" stroke-width="1.2" opacity="0.13" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <div class="hiv-diag-card">
+    <div class="hiv-diag-title">Vehicle Scan</div>
+    <div class="hiv-diag-row"><span>Engine</span><span class="hiv-diag-ok">✓ OK</span></div>
+    <div class="hiv-diag-row"><span>Brakes</span><span class="hiv-diag-ok">✓ OK</span></div>
+    <div class="hiv-diag-row"><span>Battery</span><span class="hiv-diag-ok">✓ OK</span></div>
+  </div>
+  <div class="hiv-svc-card">
+    <div class="hiv-svc-title">Services</div>
+    <div class="hiv-svc-row"><span class="hiv-svc-icon">✓</span>Exterior Hand Wash</div><div class="hiv-svc-row"><span class="hiv-svc-icon">✓</span>Interior Deep Clean</div><div class="hiv-svc-row"><span class="hiv-svc-icon">✓</span>Paint Correction</div><div class="hiv-svc-row"><span class="hiv-svc-icon">✓</span>Ceramic Coating</div>
+  </div>
   </div>
 </section>
 
